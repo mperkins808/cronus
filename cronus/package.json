@@ -1,0 +1,48 @@
+{
+  "name": "cronus",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "./scripts/run.sh && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/client": "5.6.0",
+    "@types/cookies": "^0.7.8",
+    "@types/crypto-js": "^4.1.2",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/memory-cache": "^0.2.3",
+    "@types/qrcode": "^1.5.2",
+    "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
+    "cookies": "^0.8.0",
+    "crypto-js": "^4.1.1",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^3.1.2",
+    "memory-cache": "^0.2.0",
+    "next": "13.5.4",
+    "pg": "^8.11.3",
+    "prisma": "5.6.0",
+    "qrcode": "^1.5.3",
+    "react": "^18",
+    "react-countdown": "^2.3.5",
+    "react-dom": "^18",
+    "react-qr-code": "^2.0.12",
+    "serverless-mysql": "^1.5.5",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/js-cookie": "^3.0.4",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "typescript": "^5"
+  }
+}

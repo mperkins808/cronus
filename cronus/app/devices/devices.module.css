@@ -1,0 +1,15 @@
+.deviceContainer {
+    width: 100%;
+    display: flexbox;
+}
+
+.currentDevicesContainer {
+    width: 6in;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.currentDevicesContainer > h2 {
+    margin: auto;
+    width: fit-content;
+}

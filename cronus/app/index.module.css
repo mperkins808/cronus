@@ -1,0 +1,15 @@
+.container {
+}
+
+.children {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.children > h1 {
+    margin-bottom: 2rem;
+}

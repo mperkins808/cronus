@@ -1,0 +1,33 @@
+.container {
+    padding: 1rem;
+    width: fit-content;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.container  * {
+    margin-top: 1rem;
+}
+
+.form {    
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form > * {
+    padding: 0.5rem;
+}
+
+.form > input {
+    margin-right: 1rem;
+    width: 3in;
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+.delete {
+    margin-left: 1rem;
+}

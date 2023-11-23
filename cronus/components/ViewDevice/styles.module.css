@@ -1,0 +1,25 @@
+.container {
+    margin: auto;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    width: fit-content;
+}
+
+.container > input {
+    padding: 1rem;
+}
+
+.update {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 5px;
+}
+
+.delete {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 5px;
+}

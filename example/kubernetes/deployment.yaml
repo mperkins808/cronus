@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cronus
+  labels:
+    app: cronus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cronus
+  template:
+    metadata:
+      labels:
+        app: cronus
+    spec:
+      containers:
+        - name: cronus
+          image: mattyp123/cronus:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4000
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: db-volume
+              mountPath: /db
+          env:
+            - name: CUSTOM_CONFIG
+              value: /config/cronus.ini
+      volumes:
+        - name: config-volume
+          configMap:
+            name: cronus-config
+        - name: db-volume
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronus-config
+data:
+  cronus.ini: |
+    [ADMIN]
+
+    DEFAULT_PASSWORD=cronusbonus
+
+    [DATABASE]
+
+    TYPE = sqlite
+    PATH = /db/dev.db
+
+    ENCRYPTION_KEY = <INSERT ENCRYPTION KEY>
+
+    [SESSION]
+
+    SIGNING_KEY = <INSERT SIGNING KEY>
+    LENGTH = 7d 
+    MOBILE_AUTO_RENEW = true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cronus-service
+spec:
+  selector:
+    app: cronus
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+  type: ClusterIP

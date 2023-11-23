@@ -1,0 +1,32 @@
+.container {
+    width: fit-content;
+    margin: auto;
+    padding: 1rem;
+    display: grid;
+}
+
+.addDeviceBtn {
+    padding: 1rem;
+    border-radius: 5px;
+    margin: auto;
+    width: 6in;
+}
+
+.qrCode {
+    margin-top: 1rem;
+    margin: auto;
+    width: 100%;
+    display: grid;
+}
+
+.qrCode > h2 {
+    margin: auto;
+    margin-top: 1rem;
+    width: fit-content;
+}
+
+.qrCode > h4 {
+    margin: auto;
+    margin-top: 1rem;
+    width: fit-content;
+}

@@ -1,0 +1,76 @@
+.container {
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.dsSelectorContainer {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.dsSelector {
+    border-radius: 5px;
+}
+
+.dsSelector > div {
+    position: absolute;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.dsSelectorChildren {
+    padding: 1rem;
+}
+
+
+.queryInput {
+    width: 100%;
+}
+
+.timeselectorContainer {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.saveBtn {
+    margin-left: 1rem;
+    padding: 0.5rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.deleteBtn{
+    margin-top: 1rem;
+    padding: 0.5rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.name {
+    padding: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+
+}
+
+.dropdown {
+    background-color: black;
+}
+
+.dropdownChildren {
+    padding: 0.25rem;
+
+}
+
+.labelReplacer {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}

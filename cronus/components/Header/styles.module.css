@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    height: 3rem;
+
+}
+
+.tabcontainer {
+    width: 70% ;
+    height: 100%;
+    max-width: 10in;
+    margin: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.tabcontainer > a {
+    padding: 1rem;
+
+}
+
+.logout {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.logo {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+}
