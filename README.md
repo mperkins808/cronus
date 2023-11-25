@@ -1,6 +1,6 @@
 <h1 align="center" style="border-bottom: none">
     <a  target="_blank"><img alt="Cronus" width="200px" style="    border-radius: 5px;
-" src="./documentation/images/cronus-logo-color.svg"></a><br><br>Cronus
+" src="./documentation/images/cronus.png"></a><br><br>Cronus
 </h1>
 
 ## What is Cronus
