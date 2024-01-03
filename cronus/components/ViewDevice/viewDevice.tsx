@@ -5,6 +5,8 @@ import axios from "axios";
 interface VIEW_DEVICE_PROPS {
   username: string;
   displayname: string | null;
+  deviceid: string | undefined;
+  alertsEnabled: boolean | null;
   triggerRefresh: () => void;
 }
 
@@ -12,6 +14,9 @@ export default function ViewDevice(props: VIEW_DEVICE_PROPS) {
   const [username, setUsername] = useState(props.username);
   const [updateColor, setUpdateColor] = useState("");
   const [deleteColor, setDeleteColor] = useState("");
+  const [alerts, setAlerts] = useState(
+    props.alertsEnabled ? props.alertsEnabled : false
+  );
 
   const [displayName, setDisplayname] = useState(
     props.displayname ? props.displayname : props.username
@@ -19,7 +24,7 @@ export default function ViewDevice(props: VIEW_DEVICE_PROPS) {
 
   async function updateDisplayName() {
     setUpdateColor("");
-    const Q = `/api/users?username=${username}&displayname=${displayName}`;
+    const Q = `/api/users?username=${username}&displayname=${displayName}&alerts=${alerts}`;
     try {
       const resp = await axios.patch(Q);
       if (resp.status !== 201) {
@@ -56,6 +61,16 @@ export default function ViewDevice(props: VIEW_DEVICE_PROPS) {
         value={displayName}
         onChange={(e) => setDisplayname(e.target.value)}
       />
+
+      <div className={styles.checkbox}>
+        <p>Alerts</p>
+        <input
+          checked={alerts}
+          onChange={(e) => setAlerts(!alerts)}
+          onClick={(e) => setAlerts(!alerts)}
+          type="checkbox"
+        />
+      </div>
       <button
         className={styles.update}
         style={{ backgroundColor: updateColor }}

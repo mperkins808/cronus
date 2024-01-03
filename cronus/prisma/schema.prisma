@@ -14,6 +14,13 @@ model Datasource {
   created_at Float?
 }
 
+model SaaSConnection {
+  id        String  @id
+  value     String
+  iv        String?
+  validated Boolean
+}
+
 model DSQuery {
   id              String  @id @default(cuid())
   name            String?
@@ -27,11 +34,13 @@ model DSQuery {
 }
 
 model Users {
-  username    String  @id
-  displayname String?
-  password    String
-  role        String
-  created_at  Float?
+  username      String   @id
+  displayname   String?
+  password      String
+  role          String
+  created_at    Float?
+  deviceid      String?
+  alertsenabled Boolean?
 }
 
 model Session {
@@ -42,5 +51,5 @@ model Session {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "file:../db/dev.db"
 }

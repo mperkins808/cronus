@@ -15,3 +15,14 @@
     transform: translate(-50%, -50%);
 }
 
+
+.link {
+    color: cornflowerblue;
+}
+
+.guide > div {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    padding-left: 0;
+}
+

@@ -17,6 +17,8 @@ import EnrolNewDevice from "@/components/EnroleNewDevice/enroleNewDevice";
 interface DEVICE {
   username: string;
   displayname: string | null;
+  deviceid: string | undefined;
+  alertsenabled: boolean | null;
 }
 
 export default function Home() {
@@ -67,6 +69,8 @@ export default function Home() {
             <ViewDevice
               username={d.username}
               displayname={d.displayname}
+              alertsEnabled={d.alertsenabled}
+              deviceid={d.deviceid}
               key={d.username}
               triggerRefresh={() => setrefresh(!refresh)}
             />

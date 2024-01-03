@@ -17,6 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const created_at = Math.floor(Date.now() / 1000);
+
     const hashedPassword = await hash(
       String(process.env.ADMIN_DEFAULT_PASSWORD),
       10
@@ -32,6 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
     await prisma.$disconnect();
 
+    console.log("successfully created initial admin user");
     return res
       .status(201)
       .json({ success: `successfully created initial admin user` });

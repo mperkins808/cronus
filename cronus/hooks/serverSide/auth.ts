@@ -18,6 +18,13 @@ export default async function canReq(
   res: NextApiResponse,
   requires: string
 ) {
+  // if (Boolean(process.env.ADMIN_ALLOW_API_NO_AUTH)) {
+  //   console.warn(
+  //     "ADMIN_ALLOW_API_NO_AUTH set to true. All routes will be allowed. DO NOT SET IN PRODUCTION"
+  //   );
+  //   return true;
+  // }
+
   const cookies = new Cookies(req, res);
   const sessToken = cookies.get("cronussession");
 

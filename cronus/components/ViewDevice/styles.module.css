@@ -23,3 +23,20 @@
     padding-right: 0.5rem;
     border-radius: 5px;
 }
+
+
+.checkbox {
+    margin-left: 1rem;
+    width: 4rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.checkbox > input {
+    width: 2rem; /* Adjust the width */
+    height: 2rem; /* Adjust the height */
+    font-size: 16px; /* Adjust the font size */
+    margin: auto;
+    margin-top: 2px;
+    
+}

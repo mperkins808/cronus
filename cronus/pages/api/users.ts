@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 import canReq, { ROLE_JWT } from "@/hooks/serverSide/auth";
 import { compare, hash } from "bcrypt";
+import { PrivledgedSyncDevicesWithSaaS } from "@/hooks/serverSide/devices";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const validU = await canReq(req, res, "user");
@@ -49,7 +50,9 @@ function buildUserQuery(
       select: {
         username: true,
         role: true,
+        alertsenabled: true,
         displayname: true,
+        deviceid: true,
       },
     };
   }
@@ -66,6 +69,8 @@ function buildUserQuery(
         username: true,
         role: true,
         displayname: true,
+        alertsenabled: true,
+        deviceid: true,
       },
     };
   }
@@ -81,6 +86,8 @@ function buildUserQuery(
         username: true,
         role: true,
         displayname: true,
+        alertsenabled: true,
+        deviceid: true,
       },
     };
   }
@@ -90,6 +97,8 @@ function buildUserQuery(
       username: true,
       role: true,
       displayname: true,
+      alertsenabled: true,
+      deviceid: true,
     },
   };
 }
@@ -129,6 +138,7 @@ async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
     });
     console.log(`successfully deleted user ${username}`);
     await prisma.$disconnect();
+    await PrivledgedSyncDevicesWithSaaS();
 
     return res
       .status(200)
@@ -149,13 +159,14 @@ function canUpdateUser(token: ROLE_JWT, request: string) {
 }
 
 async function updateUser(req: NextApiRequest, res: NextApiResponse) {
-  let { username, displayname, password, newpassword } = req.query;
+  let { username, displayname, password, newpassword, alerts } = req.query;
 
   if (!username || !displayname) {
     return res.status(400).json({ error: "bad request, missing variables" });
   }
 
   let token = await canReq(req, res, "mobile");
+
   if (!token || !canUpdateUser(token, String(username))) {
     return res.status(403).json({ error: "Forbidden" });
   }
@@ -165,9 +176,12 @@ async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   interface USERUPDATE {
     displayname: string;
     password?: string;
+    alertsenabled?: boolean;
   }
+
   let where: USERUPDATE = {
     displayname: String(displayname),
+    alertsenabled: alerts == "true" ? true : false,
   };
   let passwordMatch = false;
 
@@ -207,9 +221,10 @@ async function updateUser(req: NextApiRequest, res: NextApiResponse) {
       },
       data: where,
     });
-    console.log(result);
     console.log(`successfully updated user ${username}`);
     await prisma.$disconnect();
+    await PrivledgedSyncDevicesWithSaaS();
+
     return res.status(201).json({ success: `updated user ${username}` });
   } catch (error) {
     console.error(error);

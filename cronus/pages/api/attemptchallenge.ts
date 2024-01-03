@@ -4,6 +4,7 @@ import cache from "memory-cache";
 import { randomUUID } from "crypto";
 import { PrismaClient } from "@prisma/client";
 import { createSessionJWT, validateJWT } from "@/hooks/sessions";
+import { PrivledgedSyncDevicesWithSaaS } from "@/hooks/serverSide/devices";
 
 const ONE_SECOND = 1000;
 
@@ -22,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function createMobileUser(req: NextApiRequest, res: NextApiResponse) {
-  let { id, passcode } = req.query;
+  let { id, passcode, deviceid } = req.query;
 
   if (!id || !passcode) {
     return res.status(403).json({ error: "bad request" });
@@ -49,17 +50,23 @@ async function createMobileUser(req: NextApiRequest, res: NextApiResponse) {
     return res.status(403).json({ error: "Forbidden" });
   }
 
-  return addMobileToDB(req, res, String(id));
+  if (deviceid) {
+    return addMobileToDB(req, res, String(id), String(deviceid));
+  }
+
+  return addMobileToDB(req, res, String(id), undefined);
 }
 
 async function createMobileAnonUser(req: NextApiRequest, res: NextApiResponse) {
-  return addMobileToDB(req, res, "none");
+  let { deviceid } = req.query;
+  return addMobileToDB(req, res, "none", String(deviceid));
 }
 
 async function addMobileToDB(
   req: NextApiRequest,
   res: NextApiResponse,
-  id: string
+  id: string,
+  deviceid: string | undefined
 ) {
   // All is good, create a user
   cache.del(id);
@@ -73,6 +80,9 @@ async function addMobileToDB(
         password: "",
         username: username,
         role: "mobile",
+        deviceid: deviceid,
+        alertsenabled:
+          process.env.ALERTING_DEFAULT_FOR_DEVICE === "true" ? true : false,
       },
     });
     const sess = createSessionJWT(
@@ -81,6 +91,7 @@ async function addMobileToDB(
       String(process.env.SESSION_SIGNING_KEY),
       String(process.env.SESSION_LENGTH)
     );
+    await PrivledgedSyncDevicesWithSaaS();
     res.setHeader("Set-Cookie", `cronussession=${sess}; Path=/;`);
     await prisma.$disconnect();
     return res.status(201).json({ success: `${username} created` });
