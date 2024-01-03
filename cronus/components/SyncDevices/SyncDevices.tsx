@@ -7,7 +7,7 @@ export interface SYNC_DEVICES_PROPS {
   sync: boolean;
 }
 
-export default function (props: SYNC_DEVICES_PROPS) {
+export default function SyncDevices(props: SYNC_DEVICES_PROPS) {
   const [err, setErr] = useState(false);
   const [requestedUpdate, setRequestedUpdate] = useState(false);
 

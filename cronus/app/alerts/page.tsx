@@ -10,6 +10,7 @@ import styles from "./alerts.module.css";
 import APIKey from "@/components/APIKey/APIKey";
 import TestAlert from "@/components/TestAlert/TestAlert";
 import { generateAlertingURL } from "@/hooks/clientSide/urls";
+import { useEffect, useState } from "react";
 // import isLoggedIn from "@/hooks/clientSide/isLoggedIn";
 // import { redirect } from "next/navigation";
 
@@ -46,8 +47,7 @@ export default function Home() {
             <h3>Step 3.</h3>
             <span>
               {" "}
-              Forward your alerts to either{" "}
-              <p className={styles.link}>{generateAlertingURL(window)}</p> or
+              Forward your alerts to
               <p className={styles.link}>
                 {" "}
                 https://cronusmonitoring.com/api/alert

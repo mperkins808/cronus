@@ -90,21 +90,38 @@ func extractKVPairs(sections []*ini.Section) []KVS {
 }
 
 func overwriteKVPairs(newkvs []KVS, oldkvs []KVS) []KVS {
-	var finalkvs []KVS
-	for _, oldkv := range oldkvs {
+
+	var finalkvs []KVS = oldkvs
+	for i, oldkv := range oldkvs {
 		for _, newkv := range newkvs {
 			if oldkv.key == newkv.key {
-				temp := KVS{
-					key: oldkv.key,
-					val: newkv.val,
-				}
+				finalkvs[i].val = newkv.val
 				log.Debugf("overwriting default %v with custom value", oldkv.key)
-				finalkvs = append(finalkvs, temp)
 			}
 		}
 	}
+
 	return finalkvs
 }
+
+// func overwriteKVPairs(newkvs []KVS, oldkvs []KVS) []KVS {
+
+// 	var finalkvs []KVS
+// 	for _, oldkv := range oldkvs {
+// 		for _, newkv := range newkvs {
+// 			if oldkv.key == newkv.key {
+// 				temp := KVS{
+// 					key: oldkv.key,
+// 					val: newkv.val,
+// 				}
+// 				log.Debugf("overwriting default %v with custom value", oldkv.key)
+// 				finalkvs = append(finalkvs, temp)
+// 			}
+// 		}
+// 	}
+
+// 	return finalkvs
+// }
 
 func writeEnvFile(path string, kvs []KVS) error {
 	if _, err := os.Stat(path); err == nil {
