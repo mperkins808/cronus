@@ -1,8 +1,14 @@
+import canReq from "@/hooks/serverSide/auth";
 import { getapikey } from "@/hooks/serverSide/retrieveapitoken";
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const validM = await canReq(req, res, "mobile");
+  if (!validM) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+
   console.log(
     "received alert request, forwarding to saas and returning response"
   );

@@ -51,7 +51,7 @@ async function ValidateAPIConnection(
     };
 
     const resp = await axios.get(
-      `${process.env.ADMIN_CRONUS_SAAS_URL}/healthy`,
+      `${process.env.ADMIN_CRONUS_SAAS_URL}/api/healthy`,
       Auth
     );
     if (resp.status !== 200) {
